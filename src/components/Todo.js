@@ -19,14 +19,7 @@ import useStorage from '../hooks/storage';
 import {getKey} from "../lib/util";
 
 function Todo() {
-  const [items, putItems] = React.useState([
-      /* テストコード 開始 */
-    { key: getKey(), text: '日本語の宿題', done: false },
-    { key: getKey(), text: 'reactを勉強する', done: false },
-    { key: getKey(), text: '明日の準備をする', done: false },
-    /* テストコード 終了 */
-  ]);
-
+  const [items, putItems, clearItems] = useStorage();
   const handleCheck = checked => {
     const newItems = items.map(item => {
       if (item.key === checked.key) {
@@ -55,26 +48,36 @@ function Todo() {
 
 
   return (
-    <div className="panel">
-      <div className="panel-heading">
-        ITSS ToDoアプリ
-    </div>
-    <Input onAdd={handleAdd} />
-    <Filter
+    <article class="panel is-danger">
+      <div className="panel-block">
+        <span class="icon-text">
+          <span class="icon">
+            <i class="fas fa-calendar-check"></i>
+          </span>
+          <span> ITSS Todoアプリ</span>
+        </span>
+      </div>
+      <Input onAdd={handleAdd} />
+      <Filter
         onChange={handleFilterChange}
         value={filter}
-    />
-    {displayItems.map(item => (
-      <TodoItem 
-      key={item.key}
-      item={item}
-      onCheck={handleCheck}
       />
-    ))}
-    <div className="panel-block">
-      {displayItems.length} items
-    </div>
-    </div>
+      {displayItems.map(item => (
+        <TodoItem 
+          key={item.key}
+          item={item}
+          onCheck={handleCheck}
+        />
+      ))}
+      <div className="panel-block">
+        {displayItems.length} items
+      </div>
+      <div className="panel-block">
+        <button className="button is-light is-fullwidth" onClick={clearItems}>
+          全てのToDoを削除
+        </button>
+      </div>
+    </article>
   );
 }
 
