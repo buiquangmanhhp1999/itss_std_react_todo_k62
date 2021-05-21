@@ -3,12 +3,14 @@ import './App.css';
 import Todo from './components/todo'
 import './styles/main.css'
 import Login from "./components/Login";
-
- import { auth, storeUserInfo } from "./lib/firebase";
-
+import Upload from "./components/Upload";
+import { auth, storeUserInfo, updateUser } from "./lib/firebase";
 function App() {
   const [loading, setLoading] = useState(true);
    const [user, setUser] = useState([]);
+   const handleImageChanged = async downlodUrl => {
+    await updateUser(user, downlodUrl);
+  }
 
    useEffect(() => {
      auth.onAuthStateChanged(async (user) => {
@@ -30,6 +32,7 @@ function App() {
        return (
          <div class="navbar-end">
            <div class="navbar-item">
+             <Upload userImage={user.image} onSletctedImage={handleImageChanged} />
              {user.name}
            </div>
            <div class="navbar-item">
