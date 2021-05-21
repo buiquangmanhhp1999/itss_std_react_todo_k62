@@ -49,36 +49,36 @@ function Todo() {
 
   return (
     <article class="panel is-danger">
-      <div className="panel-block">
-        <span class="icon-text">
-          <span class="icon">
-            <i class="fas fa-calendar-check"></i>
-          </span>
-          <span> ITSS Todoアプリ</span>
-        </span>
-      </div>
-      <Input onAdd={handleAdd} />
-      <Filter
-        onChange={handleFilterChange}
-        value={filter}
-      />
-      {displayItems.map(item => (
-        <TodoItem 
-          key={item.key}
-          item={item}
-          onCheck={handleCheck}
-        />
-      ))}
-      <div className="panel-block">
-        {displayItems.length} items
-      </div>
-      <div className="panel-block">
-        <button className="button is-light is-fullwidth" onClick={clearItems}>
-          全てのToDoを削除
-        </button>
-      </div>
-    </article>
-  );
-}
+       <div className="panel-heading">
+       <span class="icon-text">
+           <span class="icon">
+             <i class="fas fa-calendar-check"></i>
+           </span>
+           <span> ITSS Todoアプリ</span>
+         </span>
+       </div>
+       <Input onAdd={handleAdd} />
+       <Filter
+         onChange={handleFilterChange}
+         value={filter}
+       />
+       {displayItems.map(item => (
+         <TodoItem 
+           key={item.id}
+           item={item}
+           onCheck={handleCheck}
+         />
+       ))}
+       <div className="panel-block">
+       {displayItems.length} items
+       </div>
+       <div className="panel-block">
+         <button className="button is-light is-fullwidth" onClick={clearItems}>
+           全てのToDoを削除
+         </button>
+       </div>
+       </article>
+   );
+ }
 
 export default Todo;
